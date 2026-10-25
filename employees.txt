@@ -1,0 +1,73 @@
+--- RAPORT PRACOWNIKÓW ---
+Imie: Jan 
+Nazwisko: Kowalski 
+Wiek: 36 
+Pensja: 8500 zł 
+Stanowisko: Developer
+----------------------
+Imie: Anna 
+Nazwisko: Nowak 
+Wiek: 30 
+Pensja: 4000 zł 
+Stanowisko: Developer
+----------------------
+Imie: Piotr 
+Nazwisko: Wiśniewski 
+Wiek: 41 
+Pensja: 12000 zł 
+Stanowisko: Developer
+----------------------
+Imie: Katarzyna 
+Nazwisko: Wójcik 
+Wiek: 34 
+Pensja: 6500 zł 
+Stanowisko: Tester
+----------------------
+Imie: Michał 
+Nazwisko: Kowalczyk 
+Wiek: 28 
+Pensja: 4200 zł 
+Stanowisko: Tester
+----------------------
+Imie: Agnieszka 
+Nazwisko: Kamińska 
+Wiek: 38 
+Pensja: 6200 zł 
+Stanowisko: Manager
+----------------------
+Imie: Tomasz 
+Nazwisko: Lewandowski 
+Wiek: 32 
+Pensja: 6200 zł 
+Stanowisko: Tester
+----------------------
+Imie: Magdalena 
+Nazwisko: Zielińska 
+Wiek: 40 
+Pensja: 1500 zł 
+Stanowisko: Intern
+----------------------
+Imie: Magdalena 
+Nazwisko: Zielińska 
+Wiek: 44 
+Pensja: 13200 zł 
+Stanowisko: Manager
+----------------------
+Imie: Magdalena 
+Nazwisko: Zielińska 
+Wiek: 35 
+Pensja: 18500 zł 
+Stanowisko: Developer
+----------------------
+Imie: Magdalena 
+Nazwisko: Zielińska 
+Wiek: 37 
+Pensja: 1300 zł 
+Stanowisko: Manager
+----------------------
+Imie: Magdalena 
+Nazwisko: Zielińska 
+Wiek: 41 
+Pensja: 16900 zł 
+Stanowisko: Manager
+----------------------
