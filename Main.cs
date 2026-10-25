@@ -118,12 +118,118 @@ namespace MojProgram
 
             LiniaZad("Zad 4");
             
-
-
+            var imionaINazwiska = employees.Select(emp => emp.FirstName + " " + emp.LastName);
 
             
+            foreach (var osoba in imionaINazwiska)
+            {
+                Console.WriteLine(osoba);
+            }
+            Linia();
+            var imieNazwiskoStanowisko = employees.Select(emp => emp.FirstName + " " + emp.LastName + " - " + emp.Position);
+            foreach (var osoba in imieNazwiskoStanowisko)
+            {
+                Console.WriteLine(osoba);
+            }
+            Linia();
+            var idImieNazwiskoStanowisko = employees.Select(emp => $"{emp.Id}. {emp.FirstName} {emp.LastName} - {emp.Position}");
+            foreach (var osoba in idImieNazwiskoStanowisko)
+            {
+                Console.WriteLine(osoba);
+            }
             
-        
+            LiniaZad("Zad 5.1/5.2");
+
+            int istniejąceId = 3;
+            int nieistniejąceId = 99;
+
+            var znajdzid = employees.FirstOrDefault(emp => emp.Id == istniejąceId);
+            if (znajdzid != null)
+            {
+                Console.WriteLine($"Znaleziono pracownika o ID {istniejąceId}: {znajdzid.FirstName} {znajdzid.LastName}");
+            }
+            else
+            {
+                Console.WriteLine($"Nie znaleziono pracownika o ID {istniejąceId}");
+            }
+            var znajdzidzle = employees.FirstOrDefault(emp => emp.Id == nieistniejąceId);
+            if (znajdzidzle != null)
+            {
+                Console.WriteLine($"Znaleziono pracownika o ID {nieistniejąceId}: {znajdzidzle.FirstName} {znajdzidzle.LastName}");
+            }
+            else
+            {
+                Console.WriteLine($"Nie znaleziono pracownika o ID {nieistniejąceId}");
+            }
+
+            LiniaZad("Zad 5.3/5.4/5.5");
+
+            var zad5_3 = employees.Any(emp => emp.Salary > 15_000m); 
+            Console.WriteLine($"Czy istnieje pracownik zarabiający więcej niż 15 000 zł? {zad5_3}");
+
+            var zad5_4 = employees.Any(emp => emp.Position == Position.Manager);
+            Console.WriteLine($"Czy istnieje pracownik na stanowisku Manager? {zad5_4}");
+            Console.WriteLine("Podaj stanowisko do sprawdzenia (1-4): ");
+            int pos = int.Parse(Console.ReadLine());
+            var zad5_5 = employees.Any(emp => emp.Position == (Position)pos);
+            Console.WriteLine($"Czy istnieje pracownik na stanowisku {(Position)pos}? {zad5_5}");
+
+            LiniaZad("6");
+            
+            var zad6_1 = employees.Where(emp => emp.Position == Position.Developer && emp.Salary > 10_000m).OrderByDescending(emp => emp.Salary);
+            foreach (var emp in zad6_1)
+            {
+                System.Console.WriteLine(emp);
+                System.Console.WriteLine();
+            }
+            Linia();
+
+            var z6_2 = employees.OrderByDescending(emp => emp.Salary).Take(3);
+            foreach (var emp in z6_2)
+            {
+                System.Console.WriteLine($"{emp.FirstName} {emp.LastName} - {emp.Salary}");
+            }
+
+            Linia();
+            Console.Write("Podaj numerek stanowiska: \n");
+            for (int i = 1; i < 5; i++)
+            {
+                System.Console.WriteLine($"{i}. {(Position)i}");
+            }
+            string usz6_3 = Console.ReadLine();
+
+            int uz6_3 = int.Parse(usz6_3);
+            var z6_3 = employees.Any(emp => emp.Position == (Position)uz6_3);
+            if (z6_3)
+            {
+                var naSt = employees.Where(emp => emp.Position == (Position)uz6_3).OrderBy(emp => emp.LastName);
+                foreach (var emp in naSt)
+                {
+                    System.Console.WriteLine($"{emp.LastName} {emp.FirstName} - {emp.Position}");
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("Nie ma pracownika na tym stanowisku");
+            }
+            
+            Linia();
+
+            var więcej10 = employees.Where(emp => emp.Salary > 10_000m).Select(emp => $"{emp.FirstName} {emp.LastName} | {emp.Position}");
+            foreach (var emp in więcej10)
+            {
+                System.Console.WriteLine(emp);
+            }
+             Linia();
+
+            var mlodzi = employees.OrderBy(emp => emp.Age).Take(3).Select(emp => $"{emp.FirstName} {emp.LastName} - {emp.Age}");
+
+            foreach (var emp in mlodzi)
+            {
+                System.Console.WriteLine(emp);
+            }
+
+            LiniaZad("Koniec Lab 2");
 
 
 
@@ -132,9 +238,6 @@ namespace MojProgram
 
         static void Linia()
         {
-            Console.WriteLine("-------------------------------------------------------");
-            System.Console.WriteLine();
-            System.Console.WriteLine();
             Console.WriteLine("-------------------------------------------------------");
         }
         static void LiniaZad(string zad)
