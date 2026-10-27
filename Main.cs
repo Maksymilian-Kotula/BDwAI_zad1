@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 
 namespace MojProgram
 {
@@ -27,7 +28,9 @@ namespace MojProgram
                 
                 
             };
-            
+            //--------------------Lab 2------------
+            #region 
+            /*
             Console.WriteLine("\n--- ZADANIE 2.1: ZAROBKI > 10000 ---------");
 
             
@@ -230,11 +233,139 @@ namespace MojProgram
             }
 
             LiniaZad("Koniec Lab 2");
+            */
+            #endregion
+            
+            //-----lab 3-------
+            #region 
+            LiniaZad("Zadanie 1");
+
+            System.Console.WriteLine("--- Test 1.1 (LINQ) ---");
+            var starsiLinq = GetEmployeesOlderThan(employees, 30); 
+            foreach (var emp in starsiLinq)
+            {
+                System.Console.WriteLine(emp);
+            }
+
+            System.Console.WriteLine("--- Test 1.2 (Query Syntax) ---");
+            var starsiQuery = GetEmployeesOlderThanQuerySyntax(employees, 30); 
+            foreach (var emp in starsiQuery)
+            {
+                System.Console.WriteLine(emp);
+            }
+            Linia();
+            System.Console.WriteLine("--- Test 1.2 (LINQ) ---");
+            var z1_2s = GetEmployeesWithSalaryHigherThanAndYoungerThanOrderBySalary(employees, 3500m, 30); 
+            foreach (var emp in z1_2s)
+            {
+                System.Console.WriteLine(emp);
+            }
+
+            System.Console.WriteLine("--- Test 1.1 (Query Syntax) ---");
+            var z1_2q = GetEmployeesWithSalaryHigherThanAndYoungerThanOrderBySalaryQuerySyntax(employees,3500m, 30); 
+            foreach (var emp in z1_2q)
+            {
+                System.Console.WriteLine(emp);
+            }
+            // Obie wersje zapytań zwracają ten sam wynik, ale prostsza i szybsza do pisania jest LINQ
+
+            LiniaZad("Zadanie 2");
+
+            var z2 = employees.GroupBy(emp => emp.Position);
+            var z2_23 = z2.Select(grupa => new
+            {
+                Stanowisko = grupa.Key,
+                LiczbaPracownikow = grupa.Count(),
+                SredniaP = grupa.Average(emp => emp.Salary),
+                minP = grupa.Min(emp => emp.Salary),
+                maxP = grupa.Max(emp => emp.Salary)
+
+            }).OrderByDescending(sort => sort.SredniaP);
+            foreach (var emp in z2_23)
+            {
+                System.Console.WriteLine(emp);
+            }
+            
+            var z2_4 = employees.All(emp => emp.Salary > 0);
+            if (z2_4)
+            {
+                System.Console.WriteLine("Tak wszyscy pracownicy mają pensje większa niz 0");
+            }
+            else
+            {
+                System.Console.WriteLine("Nie wszyscy pracownicy maja pensje wieksza niz 0");
+            }
+            Linia();
+            var blad1 = employees.FirstOrDefault(emp => emp.Position == Position.Developer);
+            System.Console.WriteLine(blad1);
+            try
+            {
+                var blad2 = employees.SingleOrDefault(emp => emp.Position == Position.Developer);
+                System.Console.WriteLine($"SingleOrDefault znalazl: {blad2}");
+            }
+            catch (Exception ex)
+            {
+                
+                System.Console.WriteLine($"System wyrzucił blad przy SingleOrDefault: {ex} ");
+            }
+
+            
 
 
 
+
+            #endregion
 
         }
+
+        static IEnumerable<Employee> GetEmployeesOlderThan(IEnumerable<Employee>employees, int age)
+        {
+            return employees.Where(emp => emp.Age > age);
+        }
+        static IEnumerable<Employee> GetEmployeesOlderThanQuerySyntax(IEnumerable<Employee> employees, int age)
+        {
+            return from emp in employees
+                where emp.Age > age
+                select emp;
+        }
+
+        static IEnumerable<Employee> GetEmployeesWithSalaryHigherThanAndYoungerThanOrderBySalary(IEnumerable<Employee> employees,decimal salary, int age)
+        {
+            return employees.Where(emp => emp.Salary > salary && emp.Age < age).OrderBy(emp => emp.Salary);
+        }
+        static IEnumerable<Employee> GetEmployeesWithSalaryHigherThanAndYoungerThanOrderBySalaryQuerySyntax(IEnumerable<Employee> employees,decimal salary, int age)
+        {
+            return from emp in employees
+                where emp.Salary > salary && emp.Age < age
+                orderby emp.Salary
+                select emp;
+        }
+        static IEnumerable<Employee> GetDevelopersOrEmployeesWhoseLastNameStartsWith(IEnumerable<Employee> employees, string firstLetter)
+        {
+            return employees.Where(emp => emp.Position == Position.Developer || emp.LastName.StartsWith(firstLetter));
+        }
+        static decimal GetSumOfSalaries(IEnumerable<Employee> employees)
+        {
+            return employees.Sum(emp => emp.Salary);
+        }
+        static decimal GetAverageSalaryOfDevelopers(IEnumerable<Employee> employees)
+        {
+            if (employees.Any(emp => emp.Position == Position.Developer))
+            {
+                return employees.Where(emp => emp.Position == Position.Developer).Average(emp => emp.Salary);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        static IEnumerable<decimal> GetFirstFourLowestDifferentSalaries(IEnumerable<Employee> employees)
+        {
+            return employees.Select(emp => emp.Salary).Distinct().OrderBy(x => x).Take(4);
+        }
+        
+
+
 
         static void Linia()
         {
