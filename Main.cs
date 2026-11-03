@@ -332,6 +332,25 @@ namespace MojProgram
             LiniaZad(" Zadanie 4");
 
             
+            List<int> liczbyInt = new List<int> { 2, 4, 6, 8 };
+            System.Console.WriteLine($"Czy lista intów pusta? {liczbyInt.IsEmpty()}");
+            System.Console.WriteLine($"Średnia intów: {liczbyInt.Mean()}");
+
+            
+            float[] liczbyFloat = { 1.5f, 2.5f, 3.5f };
+            System.Console.WriteLine($"Czy tablica floatów pusta? {liczbyFloat.IsEmpty()}");
+            System.Console.WriteLine($"Średnia floatów: {liczbyFloat.Mean()}");
+
+            
+            string[] napisy = { "Ala", "ma", "kota" };
+            System.Console.WriteLine($"Czy tablica stringów pusta? {napisy.IsEmpty()}");
+            System.Console.WriteLine($"Średnia długość napisów: {napisy.MeanLength()}");
+
+            
+            List<string> pustaLista = new List<string>();
+            System.Console.WriteLine($"Czy pusta lista jest pusta? {pustaLista.IsEmpty()}");
+
+
 
             #endregion
 
