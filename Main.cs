@@ -6,6 +6,8 @@ using System.Net.Http.Headers;
 
 namespace MojProgram
 {
+    public delegate void MyStringDelegate(string text);
+
     class Program
     {
         static void Main(string[] args)
@@ -295,6 +297,7 @@ namespace MojProgram
             {
                 System.Console.WriteLine("Nie wszyscy pracownicy maja pensje wieksza niz 0");
             }
+
             Linia();
             var blad1 = employees.FirstOrDefault(emp => emp.Position == Position.Developer);
             System.Console.WriteLine(blad1);
@@ -308,14 +311,45 @@ namespace MojProgram
                 
                 System.Console.WriteLine($"System wyrzucił blad przy SingleOrDefault: {ex} ");
             }
+            //FirstOrDefault znajduje pierwszy element który wystapił, SingleOrDefault zakłada że występuje tylko 1 element jeśli wystąpi wiecej to rzuca błędem  
+
+            LiniaZad("Zad 3");
+            MyStringDelegate akcja = WriteToConsole;
+            akcja += WriteToFile;
+            akcja("To jest testowa wiadomość z delegata!");
+            
+            Linia();
+            Info(WriteToConsole);
+
+            Info(delegate (string tekst) 
+            { 
+                Console.WriteLine("Działam z metody anonimowej! Tekst: " + tekst); 
+            });
+
+
+            Info(tekst => Console.WriteLine("Działam z lambdy! Tekst: " + tekst));
+
+            LiniaZad(" Zadanie 4");
 
             
 
-
-
-
             #endregion
 
+        }
+
+        static void Info(MyStringDelegate metodaWParametrze)
+        {
+            Console.WriteLine("Info about:");
+                metodaWParametrze("Tekst wygenerowany wewnątrz metody Info");
+        }
+        static void WriteToConsole(string text)
+        {
+            Console.WriteLine(text);
+        }
+
+        static void WriteToFile(string text)
+        {
+            File.AppendAllText("log.txt", text + "\n");
         }
 
         static IEnumerable<Employee> GetEmployeesOlderThan(IEnumerable<Employee>employees, int age)
